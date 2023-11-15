@@ -1,4 +1,4 @@
-package com.github.zipcodewilmington.roulette;
+package com.github.zipcodewilmington.games.roulette;
 
 import org.junit.Assert;
 import org.junit.Before;
