@@ -11,18 +11,11 @@ public class RouletteBoardTest {
     private RouletteBoard board;
     @Before
     public void setup() {
-        this.board = new RouletteBoard();
+        this.board = new RouletteBoard(populateBoard());
     }
 
     @Test
     public void rouletteBoardConstructorTest() {
         Assert.assertNotNull(board);
-    }
-
-    @Test
-    public void isRedTest(){
-
-
-        Boolean actual = board.isRed(1);
     }
 }
