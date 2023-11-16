@@ -1,4 +1,4 @@
-package com.github.zipcodewilmington.games.roulette;
+package com.github.zipcodewilmington.casino.games.roulette;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,25 +6,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RouletteBoard {
-    private final HashMap<String, Map<String, Boolean>> rouletteBoard;
 
     public RouletteBoard() {
-        this.rouletteBoard = populateRouletteBoard();
+        HashMap<String, Map<String, Boolean>> rouletteBoard = populateBoard();
     }
 
-    public HashMap<String, Map<String, Boolean>> populateRouletteBoard() {
+    public HashMap<String, Map<String, Boolean>> populateBoard() {
         HashMap<String, Map<String, Boolean>> board = new HashMap<>();
         // Make a map of the conditions for each number on the roulette board
         // Ex) "Red" : true, "Odd" : true, "FirstHalf" : true, "FirstThird" : true, "SecondThird" : false, "LastThird" : false
         // We can write methods for these and iterate through each number on the board, applying true or false for each condition
         HashMap<String, Boolean> numberConditions = new HashMap<>();
-        // Populate numberConditions with default values for every possible condition
-        numberConditions.put("Red", false);
-        numberConditions.put("Odd", false);
-        numberConditions.put("FirstHalf", false);
-        numberConditions.put("FirstThird", false);
-        numberConditions.put("SecondThird", false);
-        numberConditions.put("LastThird", false);
         // Have an array of all numbers to be iterated over and added to rouletteBoard map
         ArrayList<String> allNumbers = new ArrayList<>();
         for (int i = 1; i <= 36; i++) {
