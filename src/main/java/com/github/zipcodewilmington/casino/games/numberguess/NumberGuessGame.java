@@ -16,7 +16,8 @@ public class NumberGuessGame extends Dice{
     public Integer[] toss(){
         Integer dice1 = 0;
         Integer dice2 = 0;
-        int[] numbers = 0;
+        Integer[] numbers = new numbers;
+
 
         Random random = new Random();
         for(int i = 0; i < numbers.length; i++){
@@ -26,7 +27,7 @@ public class NumberGuessGame extends Dice{
             numbers[1] = dice2;
 
         }
-        int numbers1 = (int) numbers;
+        Integer[] numbers1 =  numbers;
         return numbers1;
     }
 }
