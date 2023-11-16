@@ -22,7 +22,7 @@ public class DeckTests {
     @Test
     public void testDeckRemoveCard(){
         Deck deck = new Deck();
-        Card actual = deck.pop();
+        Card actual = deck.removeCard();
 
         Assert.assertNotNull(actual);
         Assert.assertEquals(51, deck.size());
@@ -32,11 +32,11 @@ public class DeckTests {
     public void testDeckShuffle(){
 
         // this test is sometimes failing because sometimes
-        // two is at the top even after shuffling
+        // one is at the top even after shuffling
         Deck deck = new Deck();
 
-        Collections.shuffle(deck);
+        deck.shuffle();
 
-        Assert.assertNotEquals(2, deck.pop().getFace().getCardValue());
+        Assert.assertNotEquals(1, deck.pop().getFace().getCardValue());
     }
 }

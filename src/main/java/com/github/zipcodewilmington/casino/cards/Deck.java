@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington.casino.cards;
 
+import java.util.Collections;
 import java.util.Stack;
 
 public class Deck extends Stack<Card> {
@@ -12,6 +13,14 @@ public class Deck extends Stack<Card> {
                 this.add(c);
             }
         }
+    }
+
+    public Card removeCard(){
+        return this.pop();
+    }
+
+    public void shuffle(){
+        Collections.shuffle(this);
     }
 
 }
