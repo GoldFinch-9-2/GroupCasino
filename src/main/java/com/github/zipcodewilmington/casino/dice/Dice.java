@@ -7,7 +7,6 @@ public abstract class Dice {
         this.numberOfDice = numberOfDice;
         this.numberOfSides = 6;
     }
-    public abstract int amountOfDice();
     public abstract Object[] toss();
 
 }
