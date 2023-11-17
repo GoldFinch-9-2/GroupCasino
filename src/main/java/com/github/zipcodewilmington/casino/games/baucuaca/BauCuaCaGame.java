@@ -73,8 +73,8 @@ public class BauCuaCaGame implements GameInterface {
                     "      ░                       ░                              ░                  \n");
             //prompt for play input and setting them equal to bet amount and bet character
             System.out.println("WELCOME TO BAU CUA CA!");
-            System.out.println(Arrays.toString(bccBoard));
             System.out.println("YOUR CURRENT BALANCE IS :" +player.getBalance());
+            System.out.println(Arrays.toString(bccBoard));
             System.out.println("CHOOSE YOUR CHARACTER!");
             plaverBettingChar = scanner.nextLine().toUpperCase();
             System.out.println("PlACE YOUR BEETS!");
