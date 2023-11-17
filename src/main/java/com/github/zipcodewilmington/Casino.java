@@ -12,6 +12,8 @@ import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
 import com.github.zipcodewilmington.casino.games.blackjack.BlackJackPlayer;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
+import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
+import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
@@ -46,11 +48,9 @@ public class Casino implements Runnable {
                     }
                     else if (gameSelectionInput.equals("BAU-CUA-CA")) {
                         play(new BauCuaCaGame(), new BauCuaCaPlayer(casinoAccount));
-                    }
-                    else if (gameSelectionInput.equals("BLACKJACK")){
-                        play(new BlackJackGame(), new BlackJackPlayer(casinoAccount));
-                    }
-                    else {
+                    } else if (gameSelectionInput.equals("ROULETTE")) {
+                        play(new RouletteGame(), new RoulettePlayer(casinoAccount));
+                    } else {
                         // TODO - implement better exception handling
                         String errorMessage = "[ %s ] is an invalid game selection";
                         throw new RuntimeException(String.format(errorMessage, gameSelectionInput));
@@ -86,7 +86,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ NUMBERGUESS ], [ BAU-CUA-CA ], [ BLACKJACK ]")
+                .append("\n\t[ SLOTS ], [ NUMBERGUESS ], [ BAU-CUA-CA ], [ BLACKJACK ], [ROULETTE], [BINGO]")
                 .toString());
     }
 
