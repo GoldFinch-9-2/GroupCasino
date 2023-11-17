@@ -5,6 +5,10 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 
 public class RoulettePlayer implements PlayerInterface {
 
+    public RoulettePlayer(){
+
+    }
+
     @Override
     public CasinoAccount getArcadeAccount() {
         return null;

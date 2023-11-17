@@ -1,13 +1,17 @@
 package com.github.zipcodewilmington.casino.games.roulette;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.GamblingInterface;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.utils.AnsiColor;
+import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class RouletteGame implements GameInterface {
+public class RouletteGame implements GameInterface, GamblingInterface {
+    private final IOConsole console = new IOConsole(AnsiColor.BLUE);
     CasinoAccount account = new CasinoAccount("user","pass");
 
     RouletteBoard board;
@@ -107,6 +111,11 @@ public class RouletteGame implements GameInterface {
 
     @Override
     public boolean playAgain(String prompt) {
+        return false;
+    }
+
+    @Override
+    public boolean placeBets(int moneyToBet) {
         return false;
     }
 }

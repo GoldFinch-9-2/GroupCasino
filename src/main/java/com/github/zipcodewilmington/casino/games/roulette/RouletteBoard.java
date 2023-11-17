@@ -10,6 +10,7 @@ public class RouletteBoard {
     ArrayList<String> allNumbers = new ArrayList<>();
     HashMap<String, Boolean> numberConditions = new HashMap<>();
     HashMap<String, Map<String, Boolean>> rouletteBoard;
+    RouletteGame game;
 
     public RouletteBoard() {
         this.rouletteBoard = populateBoard();
@@ -28,31 +29,31 @@ public class RouletteBoard {
             else {
                 numberConditions.put("Red", false);
             }
-            if (Integer.valueOf(allNumbers.get(i)) % 2 == 0){
+            if (game.isOdd(allNumbers.get(i))){
                 numberConditions.put("Odd", true);
             }
             else {
                 numberConditions.put("Odd", false);
             }
-            if (Integer.valueOf(allNumbers.get(i)) <= 12){
+            if (game.isFirstThird(allNumbers.get(i))){
                 numberConditions.put("FirstThird", true);
             }
             else {
                 numberConditions.put("FirstThird", false);
             }
-            if (Integer.valueOf(allNumbers.get(i)) <= 18){
+            if (game.isFirstHalf(allNumbers.get(i))){
                 numberConditions.put("FirstHalf", true);
             }
             else {
                 numberConditions.put("FirstHalf", false);
             }
-            if (Integer.valueOf(allNumbers.get(i)) >= 13 && Integer.valueOf(allNumbers.get(i)) <= 24){
+            if (game.isSecondThird(allNumbers.get(i))){
                 numberConditions.put("SecondThird", true);
             }
             else {
                 numberConditions.put("SecondThird", false);
             }
-            if (Integer.valueOf(allNumbers.get(i)) >= 24 && Integer.valueOf(allNumbers.get(i)) <= 36){
+            if (game.isLastThird(allNumbers.get(i))){
                 numberConditions.put("LastThird", true);
             }
             else {
