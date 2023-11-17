@@ -13,6 +13,7 @@ public class Deck extends Stack<Card> {
                 this.add(c);
             }
         }
+        this.shuffle();
     }
 
     public Card removeCard(){
