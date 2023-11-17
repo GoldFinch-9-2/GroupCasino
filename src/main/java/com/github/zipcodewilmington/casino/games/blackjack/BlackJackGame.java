@@ -9,6 +9,8 @@ import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class BlackJackGame implements GameInterface {
 
@@ -43,9 +45,9 @@ public class BlackJackGame implements GameInterface {
 
         do {
             player.printBalance();
-            bet = player.placeBets(console.getDoubleInput("How much would you like to bet?: "));
             dealHands(player);
             boolean playAgain = true;
+            bet = askForBet(player);
 
             while (playAgain){
                 // checks if anyone is dealt a blackjack from beginning
@@ -56,28 +58,16 @@ public class BlackJackGame implements GameInterface {
                 printHands(player);
                 String input = console.getStringInput("Dealer's hand is: " + dealer.getSumOfCards() + "\nYour current hand is: " + player.getSumOfCards() + "\nWould you like to hit or stand?\n" +
                         "    [ HIT ] , [ STAND ] ");
-                if (input.equalsIgnoreCase("hit")) {
-                    playAgain = hit(player);
-                } else if (input.equalsIgnoreCase("stand")){
-                    player.stand();
 
-                    // dealer keeps hitting until it gets to the point where it wins or busts
-                    dealerMove();
-                    while (!dealer.getStand() && (this.dealer.getSumOfCards() != player.getSumOfCards())) {
-                        printHands(player);
-                        System.out.println("(stand)Dealer's hand is: " + this.dealer.getSumOfCards() + "\nYour current hand is: " + player.getSumOfCards() + "\n");
-                        determineAfterDealerMove(player);
-                        dealerMove();
-                    }
-                    break;
-                }
+                // moved game logic into play method to test it
+                playAgain = play(input, player);
 
-                if(player.getStand() && this.dealer.getStand()){;
+                if(player.getStand() && this.dealer.getStand()){
                     break;
                 }
 
             }
-
+            System.out.println(" *** GAME OVER ***");
             printHands(player);
             System.out.println("*** ENDING SCORE *** \nDealer's hand is: " + this.dealer.getSumOfCards() + "\nYour current hand is: " + player.getSumOfCards() + "\n****");
 
@@ -101,7 +91,7 @@ public class BlackJackGame implements GameInterface {
 
     public void dealHands(BlackJackPlayer player){
         this.dealer.addToHand(deal());
-        this.dealer.addToHand(deal());
+        //this.dealer.addToHand(deal());
         player.addToHand(deal());
         player.addToHand(deal());
     }
@@ -118,25 +108,23 @@ public class BlackJackGame implements GameInterface {
     public boolean hit(BlackJackPlayer player){
         player.addToHand(deal());
         boolean playAgain = checkPlayerCards(player);
-        if(!dealer.getStand() && playAgain) {
-            dealerMove();
-            playAgain = determineAfterDealerMove(player);
-            return playAgain;
-        }
-        else if(dealer.getStand() && (player.getSumOfCards() > this.dealer.getSumOfCards())){
-            return playAgain;
-        }
+//        if(!dealer.getStand() && playAgain) {
+//            dealerMove();
+//            playAgain = determineAfterDealerMove(player);
+//            return playAgain;
+//        }
+//        else if(dealer.getStand() && (player.getSumOfCards() > this.dealer.getSumOfCards())){
+//            return playAgain;
+//        }
         return playAgain;
     }
 
     public boolean checkPlayerCards(BlackJackPlayer player){
         if(player.getSumOfCards() > 21){
-            //System.out.println("Dealer's hand is: "+dealer.getSumOfCards()+"\nYour current hand is: " + player.getSumOfCards());
             System.out.println("*** BUST! ***");
             return false;
         }
         else if(player.getSumOfCards() == 21){
-            //System.out.println("Dealer's hand is: "+dealer.getSumOfCards()+"\nYour current hand is: " + player.getSumOfCards());
             System.out.println("*** BLACK JACK! ***");
             return false;
         }
@@ -163,15 +151,15 @@ public class BlackJackGame implements GameInterface {
             player.getArcadeAccount().setBalance(player.getArcadeAccount().getBalance() + bet);
             // player get winnings
         }
-        else if(player.getSumOfCards() > this.dealer.getSumOfCards() && this.dealer.getSumOfCards() < 21 && player.getSumOfCards() <= 21){
+        else if(player.getSumOfCards() > this.dealer.getSumOfCards() && this.dealer.getSumOfCards() < 21 && player.getSumOfCards() < 21){
             System.out.println("YOU WIN!");
             player.getArcadeAccount().setBalance(player.getArcadeAccount().getBalance() + bet);
         }
-        /*else if(player.getSumOfCards() == 21){
-            System.out.println("YOU WIN! (winner)");
+        else if(player.getSumOfCards() == 21){
+            System.out.println("YOU WIN!");
             player.getArcadeAccount().setBalance(player.getArcadeAccount().getBalance() + (bet * 2));
             // player get winnings
-        }*/
+        }
         else{
            System.out.println("YOU LOSE!");
             player.getArcadeAccount().setBalance(player.getArcadeAccount().getBalance() - bet );
@@ -199,5 +187,47 @@ public class BlackJackGame implements GameInterface {
 
     public BlackJackPlayer getDealer() {
         return this.dealer;
+    }
+
+    public double askForBet(BlackJackPlayer player) {
+        double answer = -1;
+        while (answer == -1){
+            answer = console.getDoubleInput("How much would you like to bet?: ");
+            if(answer < 10){
+                answer = -1;
+                System.out.println("Must be more than $10 !!");
+            }
+            else if(answer > player.getArcadeAccount().getBalance()){
+                answer = -1;
+                System.out.println("You don't even have that much money!");
+            }
+        }
+        return answer;
+    }
+
+    public boolean play(String input, BlackJackPlayer player){
+        boolean play = true;
+        if (input.equalsIgnoreCase("hit")) {
+            play = hit(player);
+        } else if (input.equalsIgnoreCase("stand")){
+            player.stand();
+
+            // dealer keeps hitting until it gets to the point where it wins or busts
+            dealerMove();
+            while (!dealer.getStand() && (this.dealer.getSumOfCards() != player.getSumOfCards())) {
+                printHands(player);
+                System.out.println("Dealer's hand is: " + this.dealer.getSumOfCards() + "\nYour current hand is: " + player.getSumOfCards() + "\n");
+                determineAfterDealerMove(player);
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                dealerMove();
+            }
+            play = false;
+        }
+
+        return play;
     }
 }

@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class BlackJackTest {
@@ -189,7 +190,7 @@ public class BlackJackTest {
         bjPlayer.setSumOfCards(21);
         bj.determineWinner(bjPlayer, bet);
 
-        Assert.assertEquals(200.00,acc.getBalance() , 2);
+        Assert.assertEquals(300.00,acc.getBalance() , 2);
 
     }
 
@@ -245,7 +246,7 @@ public class BlackJackTest {
         BlackJackPlayer bjPlayer = new BlackJackPlayer(acc);
         BlackJackGame bj = new BlackJackGame();
         bj.getDealer().setSumOfCards(20);
-        bjPlayer.setSumOfCards(10);
+        //bjPlayer.setSumOfCards(10);
 
         Assert.assertTrue(bj.hit(bjPlayer));
     }
@@ -257,10 +258,67 @@ public class BlackJackTest {
         BlackJackGame bj = new BlackJackGame();
         bj.getDealer().stand();
         bj.getDealer().setSumOfCards(20);
-        bjPlayer.setSumOfCards(10);
+        bjPlayer.setSumOfCards(20);
 
-        Assert.assertTrue(bj.hit(bjPlayer));
+        Assert.assertFalse(bj.hit(bjPlayer));
     }
+
+    @Test
+    public void testDealerMove(){
+        BlackJackGame bj = new BlackJackGame();
+        bj.getDealer().getHand().add(new Card(Suit.SPADES, Face.ACE));
+
+        bj.dealerMove();
+
+        Assert.assertEquals(2, bj.getDealer().getHand().size());
+
+    }
+
+    @Test
+    public void testDealerMove2(){
+        BlackJackGame bj = new BlackJackGame();
+        bj.getDealer().setSumOfCards(20);
+
+        bj.dealerMove();
+
+        Assert.assertTrue(bj.getDealer().getStand());
+
+    }
+
+    @Test
+    public void testPlay(){
+        BlackJackGame game = new BlackJackGame();
+        CasinoAccount casinoAccount = new CasinoAccount("user", "pass", 1000.0);
+        BlackJackPlayer player = new BlackJackPlayer(casinoAccount);
+
+        boolean actual = game.play("hit", player);
+
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void testPlay2(){
+        BlackJackGame game = new BlackJackGame();
+        CasinoAccount casinoAccount = new CasinoAccount("user", "pass", 1000.0);
+        BlackJackPlayer player = new BlackJackPlayer(casinoAccount);
+
+        boolean actual = game.play("stand", player);
+
+        Assert.assertFalse(actual);
+    }
+
+//    @Test
+//    public void testAskForBet(){
+//        BlackJackGame game = new BlackJackGame();
+//        CasinoAccount casinoAccount = new CasinoAccount("user", "pass", 1000.0);
+//        BlackJackPlayer player = new BlackJackPlayer(casinoAccount);
+//        InputStream sysInBackup = System.in;
+//        ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
+//        System.setIn(in);
+//
+//        game.add(player);
+//        game.askForBet(player);
+//    }
 
 
 }
