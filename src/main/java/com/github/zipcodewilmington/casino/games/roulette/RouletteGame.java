@@ -27,7 +27,7 @@ public class RouletteGame implements GameInterface {
 
     public String spin(){
         return allNumbers.get(random.nextInt(36) + 1);
-    }
+    } // Make a test for this
 
     public boolean isRed(String currentNumber) {
         if (currentNumber.equals("00") || currentNumber.equals("0")){
@@ -83,7 +83,7 @@ public class RouletteGame implements GameInterface {
         }
     }
 
-    public boolean checkCondition(String condition){
+    public boolean checkCondition(String condition){ // Make a test for this
         switch (condition) {
             case "1-12":
                 return isFirstThird(currentNumber);
@@ -109,7 +109,7 @@ public class RouletteGame implements GameInterface {
 
     public double getPlayerBet(){
         return playerBet;
-    }
+    } // Make this testable
 
     public double getWinnings(String condition){
         if (TripleMultiplier.contains(condition)){
