@@ -8,8 +8,6 @@ import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
 import com.github.zipcodewilmington.casino.games.blackjack.BlackJackPlayer;
 import com.github.zipcodewilmington.casino.games.baucuaca.BauCuaCaGame;
 import com.github.zipcodewilmington.casino.games.baucuaca.BauCuaCaPlayer;
-import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
-import com.github.zipcodewilmington.casino.games.blackjack.BlackJackPlayer;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
 import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
@@ -50,6 +48,7 @@ public class Casino implements Runnable {
                         play(new BauCuaCaGame(), new BauCuaCaPlayer(casinoAccount));
                     } else if (gameSelectionInput.equals("ROULETTE")) {
                         play(new RouletteGame(), new RoulettePlayer(casinoAccount));
+
                     } else {
                         // TODO - implement better exception handling
                         String errorMessage = "[ %s ] is an invalid game selection";
