@@ -34,7 +34,7 @@ public class BlackJackPlayer implements PlayerInterface, GamblingInterface {
     }
 
     @Override
-    public boolean play() {
+    public Boolean play() {
         return this.play;
     }
 

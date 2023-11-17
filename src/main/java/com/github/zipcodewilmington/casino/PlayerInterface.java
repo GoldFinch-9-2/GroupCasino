@@ -16,5 +16,5 @@ public interface PlayerInterface {
      * Defines how a specific implementation of `PlayerInterface` plays their respective game.
      * @return whatever return value you would like
      */
-    boolean play();
+    Boolean play();
 }
