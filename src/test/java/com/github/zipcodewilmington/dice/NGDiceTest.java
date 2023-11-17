@@ -1,25 +1,26 @@
 package com.github.zipcodewilmington.dice;
 
 import com.github.zipcodewilmington.casino.dice.Dice;
+import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessDice;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class NGDiceTest {
+    @Test
     public void testDiceConstructor() {
-        int numberOfDice =2;
-        Dice dice = new Dice(numberOfDice);
-
-        Assert.assertNotNull(dice);
+        NumberGuessDice noOfDice = new NumberGuessDice();
+        Assert.assertEquals(2, noOfDice.numberOfDice);
     }
 
     @Test
-    public void testToss(){
+    public void testToss() {
         int numberOfDice = 2;
-        Dice dice = new Dice(numberOfDice);
-        Integer actual = dice.toss();
-        // this is for the max value for the number of dice used
-        Assert.assertTrue(actual <= numberOfDice *6);
-        // this is for the min value for the number of dice used
-        Assert.assertTrue(actual >= numberOfDice);
-
+        NumberGuessDice numberGuessDice = new NumberGuessDice();
+        Integer[] actual = numberGuessDice.toss();
+        Assert.assertEquals(2, actual.length);
+        Assert.assertTrue(actual[0]>=1 && actual[0]<=6);
+        Assert.assertTrue(actual[1]>=1 && actual[1]<=6);
     }
+
+
+}
