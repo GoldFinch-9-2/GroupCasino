@@ -1,41 +1,36 @@
 package com.github.zipcodewilmington.casino.games.bingo;
 
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class BingoBoard {
     Integer[][] bingoBoard = new Integer[5][5];
     Random rand = new Random();
-
-    public Integer[][] populateColumn(int col) {
-//        for (int i = 0; i < 5; i++) {
-//            if (bingoBoard[i][col] == )
-//                bingoBoard[i][col] = rand.nextInt(15) + 1 + (15 * col); // Make sure numbers don't repeat
-//
-//        }
-        return bingoBoard;
+    public BingoBoard() {
+        this.bingoBoard = populateColumn();
     }
 
-    public boolean checkDuplicate(int col, int assignedNum) {
-//        for (int i = 0; i < 5; i++) {
-//            if (bingoBoard[i][col] == bin) {
-//
-//            }
-//        }
-        return true;
+    public Integer[][] populateColumn() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                bingoBoard[i][j] = rand.nextInt(15) + 1 + (15 * j); // Make sure numbers don't repeat
+                for (int k = i; k >= 0; k--) {
+                    while (true) {
+                        if (Objects.equals(bingoBoard[k][j], bingoBoard[i][j])) {
+                            bingoBoard[i][j] = rand.nextInt(15) + 1 + (15 * j);
+                            break;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        return bingoBoard;
     }
 
     public Integer[][] getBingoBoard() {
         return this.bingoBoard;
     }
 
-    public Integer[][] populateBoard() { //Help here
-        for (int i = 0; i < 5; i++) {
-            populateColumn(i);
-
-        }
-//        }return bingoBoard;
-//    }  for (int j = 0; j < 5;j++){
-//        populateRow(j);
-        return null;
-    }
 }
