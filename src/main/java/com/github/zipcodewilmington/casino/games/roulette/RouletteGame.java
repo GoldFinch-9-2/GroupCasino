@@ -131,8 +131,17 @@ public class RouletteGame implements GameInterface {
     @Override
     public void run() {
         Scanner scan = new Scanner(System.in);
+        System.out.println("\n" +
+                " ____                     ___           __    __             \n" +
+                "/\\  _`\\                  /\\_ \\         /\\ \\__/\\ \\__          \n" +
+                "\\ \\ \\L\\ \\    ___   __  __\\//\\ \\      __\\ \\ ,_\\ \\ ,_\\    __   \n" +
+                " \\ \\ ,  /   / __`\\/\\ \\/\\ \\ \\ \\ \\   /'__`\\ \\ \\/\\ \\ \\/  /'__`\\ \n" +
+                "  \\ \\ \\\\ \\ /\\ \\L\\ \\ \\ \\_\\ \\ \\_\\ \\_/\\  __/\\ \\ \\_\\ \\ \\_/\\  __/ \n" +
+                "   \\ \\_\\ \\_\\ \\____/\\ \\____/ /\\____\\ \\____\\\\ \\__\\\\ \\__\\ \\____\\\n" +
+                "    \\/_/\\/ /\\/___/  \\/___/  \\/____/\\/____/ \\/__/ \\/__/\\/____/\n" +
+                "                                                             \n" +
+                "                                                             ");
         while(true){
-            System.out.println("          WELCOME TO ROULETTE!");
             System.out.println("         [1-12] [13-24] [25-36]");
             System.out.println("[1-18] [EVEN] [RED] [BLACK] [ODD] [19-36]");
             System.out.println("                [QUIT]\n");

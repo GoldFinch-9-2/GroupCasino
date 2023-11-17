@@ -22,7 +22,7 @@ public class RoulettePlayer implements PlayerInterface, GamblingInterface {
     }
 
     @Override
-    public double placeBets(double moneyToBet) {
+    public Double placeBets(double moneyToBet) {
         return this.bet = moneyToBet;
     }
 }
