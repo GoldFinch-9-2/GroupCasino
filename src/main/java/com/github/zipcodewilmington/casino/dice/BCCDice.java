@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class BCCDice extends Dice {
 
-    public String[] symbols = {"fish", "prawn", "crab", "rooster", "gourd", "deer"};
+    public String[] symbols = {"FISH", "PRAWN", "CRAB", "ROOSTER", "GOURD", "DEER"};
 
     public BCCDice(int numOfDice){
         super(numOfDice);
