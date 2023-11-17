@@ -18,7 +18,7 @@ public class RoulettePlayer implements PlayerInterface, GamblingInterface {
 
     @Override
     public Boolean play() {
-        return null;
+        return true;
     }
 
     @Override

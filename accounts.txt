@@ -1,6 +1,6 @@
 tamdoan,hi12345,1000.0
-yeet,Yeet,4600.0
-m,d,2930.0
 newacc,new12345,0.0
-theleuth,password,9500.0
+yeet,Yeet,4600.0
+theleuth,password,11000.0
+m,d,4800.0
 mariadoan,hi54321,100.0
