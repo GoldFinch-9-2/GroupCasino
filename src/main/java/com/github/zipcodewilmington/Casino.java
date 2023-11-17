@@ -44,7 +44,7 @@ public class Casino implements Runnable {
                     } else if (gameSelectionInput.equals("BLACKJACK")){
                         play(new BlackJackGame(), new BlackJackPlayer(casinoAccount));
                     }
-                    else if (gameSelectionInput.equals("BAU-CUA-CA")) {
+                    else if (gameSelectionInput.equals("BAUCUACA")) {
                         play(new BauCuaCaGame(), new BauCuaCaPlayer(casinoAccount));
                     } else if (gameSelectionInput.equals("ROULETTE")) {
                         play(new RouletteGame(), new RoulettePlayer(casinoAccount));
@@ -85,7 +85,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ NUMBERGUESS ], [ BAU-CUA-CA ], [ BLACKJACK ], [ROULETTE], [BINGO]")
+                .append("\n\t[ SLOTS ], [ NUMBERGUESS ], [ BAUCUACA ], [ BLACKJACK ], [ROULETTE], [BINGO]")
                 .toString());
     }
 
