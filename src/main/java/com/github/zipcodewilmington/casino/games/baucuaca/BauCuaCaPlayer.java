@@ -1,14 +1,18 @@
-package com.github.zipcodewilmington.casino.games.numberguess;
+package com.github.zipcodewilmington.casino.games.baucuaca;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GamblingInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
-
-public class NumberGuessPlayer implements PlayerInterface, GamblingInterface {
-    //@Override
+import java.util.Scanner;
+public class BauCuaCaPlayer implements PlayerInterface, GamblingInterface {
     CasinoAccount account;
+    double bet;
 
-    public NumberGuessPlayer(CasinoAccount account){
+    public CasinoAccount getAccount() {
+        return account;
+    }
+
+    public BauCuaCaPlayer(CasinoAccount account){
         this.account = account;
     }
     @Override
@@ -17,10 +21,11 @@ public class NumberGuessPlayer implements PlayerInterface, GamblingInterface {
     }
 
     @Override
-    public Boolean play() {return false;}
+    public Boolean play() {return null;}
+
 
     @Override
     public Double placeBets(double moneyToBet) {
-        return moneyToBet;
+        return this.bet = moneyToBet;
     }
 }
