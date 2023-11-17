@@ -1,115 +1,101 @@
 package com.github.zipcodewilmington.games.roulette;
 
+import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
+import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class RouletteTest {
     private RouletteGame game;
+    ArrayList<RoulettePlayer> players;
+    CasinoAccount account;
+
     @Before
     public void setup() {
         this.game = new RouletteGame();
+        this.players = new ArrayList<>();
     }
 
     @Test
-    public void isRedTest1(){
+    public void isRedTest(){
         Assert.assertTrue(game.isRed("1"));
-    }
-
-    @Test
-    public void isRedTest17(){
         Assert.assertFalse(game.isRed("17"));
-    }
-
-    @Test
-    public void isRedTest36(){
         Assert.assertTrue(game.isRed("36"));
+        Assert.assertFalse(game.isRed("00"));
     }
 
     @Test
-    public void isOddTest1(){
+    public void isOddTest(){
         Assert.assertTrue(game.isOdd("1"));
-    }
-
-    @Test
-    public void isOddTest17(){
         Assert.assertTrue(game.isOdd("17"));
-    }
-
-    @Test
-    public void isOddTest36(){
         Assert.assertFalse(game.isOdd("36"));
+        Assert.assertFalse(game.isOdd("00"));
     }
 
     @Test
-    public void isFirstHalfTest1(){
+    public void isFirstHalfTest(){
         Assert.assertTrue(game.isFirstHalf("1"));
-    }
-
-    @Test
-    public void isFirstHalfTest17(){
         Assert.assertTrue(game.isFirstHalf("17"));
-    }
-
-    @Test
-    public void isFirstHalfTest36(){
         Assert.assertFalse(game.isFirstHalf("36"));
+        Assert.assertFalse(game.isFirstHalf("00"));
     }
 
     @Test
-    public void isFirstThirdTest1(){
+    public void isFirstThirdTest(){
         Assert.assertTrue(game.isFirstThird("1"));
-    }
-
-    @Test
-    public void isFirstThirdTest17(){
         Assert.assertFalse(game.isFirstThird("17"));
-    }
-
-    @Test
-    public void isFirstThirdTest36(){
         Assert.assertFalse(game.isFirstThird("36"));
+        Assert.assertFalse(game.isFirstThird("00"));
     }
 
     @Test
-    public void isSecondThirdTest1(){
+    public void isSecondThirdTest(){
         Assert.assertFalse(game.isSecondThird("1"));
-    }
-
-    @Test
-    public void isSecondThirdTest17(){
         Assert.assertTrue(game.isSecondThird("17"));
-    }
-
-    @Test
-    public void isSecondThirdTest36(){
         Assert.assertFalse(game.isSecondThird("36"));
+        Assert.assertFalse(game.isSecondThird("00"));
     }
 
     @Test
-    public void isLastThirdTest1(){
+    public void isLastThirdTest(){
         Assert.assertFalse(game.isLastThird("1"));
-    }
-
-    @Test
-    public void isLastThirdTest17(){
         Assert.assertFalse(game.isLastThird("17"));
-    }
-
-    @Test
-    public void isLastThirdTest36(){
         Assert.assertTrue(game.isLastThird("36"));
+        Assert.assertFalse(game.isLastThird("00"));
     }
 
     @Test
-    public void quitTest() {Assert.assertFalse(game.quit());}
+    public void quitTest() {
+        Assert.assertFalse(game.quit());
+    }
 
     @Test
-    public void playAgainTest() {Assert.assertFalse(game.playAgain("POOPY"));}
+    public void playAgainTest() {
+        Assert.assertFalse(game.playAgain("PLAY AGAIN?"));
+    }
 
     @Test
     public void getWinningsTest() {
         Assert.assertEquals(game.getWinnings("RED"), game.getPlayerBet()*2, 0);
+        Assert.assertEquals(game.getWinnings("1-18"), game.getPlayerBet()*3, 0);
+    }
+
+    @Test
+    public void addPlayerTest() {
+        players.add(new RoulettePlayer(this.account));
+        Assert.assertNotNull(players);
+    }
+
+    @Test
+    public void removePlayerTest() {
+        RoulettePlayer player = new RoulettePlayer(this.account);
+        players.add(player);
+        players.remove(player);
+        Assert.assertEquals(players.size(), 0);
     }
 }
