@@ -4,6 +4,8 @@ import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.dice.BCCDice;
+import com.github.zipcodewilmington.utils.AnsiColor;
+import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 
 
 public class BauCuaCaGame implements GameInterface {
+    private final IOConsole console = new IOConsole(AnsiColor.BLUE);
     BCCDice bccDice = new BCCDice(3);
     String[] bccBoard = {"FISH", "PRAWN", "CRAB", "ROOSTER", "GOURD", "DEER"};
     public ArrayList<BauCuaCaPlayer> players = new ArrayList<>();
@@ -57,7 +60,19 @@ public class BauCuaCaGame implements GameInterface {
         Scanner scanner = new Scanner(System.in);
         CasinoAccount player = players.get(0).getArcadeAccount();
         while(true){
-            System.out.println("WELCOME TO BAU CUA CAU!");
+            console.println("\n" +
+                    " ▄▄▄▄    ▄▄▄       █    ██     ▄████▄   █    ██  ▄▄▄          ▄████▄   ▄▄▄      \n" +
+                    "▓█████▄ ▒████▄     ██  ▓██▒   ▒██▀ ▀█   ██  ▓██▒▒████▄       ▒██▀ ▀█  ▒████▄    \n" +
+                    "▒██▒ ▄██▒██  ▀█▄  ▓██  ▒██░   ▒▓█    ▄ ▓██  ▒██░▒██  ▀█▄     ▒▓█    ▄ ▒██  ▀█▄  \n" +
+                    "▒██░█▀  ░██▄▄▄▄██ ▓▓█  ░██░   ▒▓▓▄ ▄██▒▓▓█  ░██░░██▄▄▄▄██    ▒▓▓▄ ▄██▒░██▄▄▄▄██ \n" +
+                    "░▓█  ▀█▓ ▓█   ▓██▒▒▒█████▓    ▒ ▓███▀ ░▒▒█████▓  ▓█   ▓██▒   ▒ ▓███▀ ░ ▓█   ▓██▒\n" +
+                    "░▒▓███▀▒ ▒▒   ▓▒█░░▒▓▒ ▒ ▒    ░ ░▒ ▒  ░░▒▓▒ ▒ ▒  ▒▒   ▓▒█░   ░ ░▒ ▒  ░ ▒▒   ▓▒█░\n" +
+                    "▒░▒   ░   ▒   ▒▒ ░░░▒░ ░ ░      ░  ▒   ░░▒░ ░ ░   ▒   ▒▒ ░     ░  ▒     ▒   ▒▒ ░\n" +
+                    " ░    ░   ░   ▒    ░░░ ░ ░    ░         ░░░ ░ ░   ░   ▒      ░          ░   ▒   \n" +
+                    " ░            ░  ░   ░        ░ ░         ░           ░  ░   ░ ░            ░  ░\n" +
+                    "      ░                       ░                              ░                  \n");
+            //prompt for play input and setting them equal to bet amount and bet character
+            System.out.println("WELCOME TO BAU CUA CA!");
             System.out.println(Arrays.toString(bccBoard));
             System.out.println("YOUR CURRENT BALANCE IS :" +player.getBalance());
             System.out.println("CHOOSE YOUR CHARACTER!");
@@ -66,6 +81,7 @@ public class BauCuaCaGame implements GameInterface {
             double bet = scanner.nextDouble();
             playerBetMoney = players.get(0).placeBets(bet);
 
+            //invoking getWinMoney to see how much the play won or lost
             Double winOrLose = getWinMoney();
             System.out.println("YOU WON: " + winOrLose);
             if(winOrLose > 0) {
@@ -77,6 +93,8 @@ public class BauCuaCaGame implements GameInterface {
                 player.setBalance(loss);
                 System.out.println("YOUR NEW BALANCE IS: $" + loss);
             }
+
+            //prompt for player to resume or quit game and save account balance
             scanner.nextLine();
             System.out.println("DO YOU WISH TO CONTINUE?? \n [ resume ] or [ quit ]");
             resume = scanner.nextLine().toLowerCase();
