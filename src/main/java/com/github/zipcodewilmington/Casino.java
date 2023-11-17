@@ -4,6 +4,8 @@ import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackJackPlayer;
 import com.github.zipcodewilmington.casino.games.baucuaca.BauCuaCaGame;
 import com.github.zipcodewilmington.casino.games.baucuaca.BauCuaCaPlayer;
 import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
@@ -39,7 +41,10 @@ public class Casino implements Runnable {
                         play(new SlotsGame(), new SlotsPlayer());
                     } else if (gameSelectionInput.equals("NUMBERGUESS")) {
                         play(new NumberGuessGame(), new NumberGuessPlayer());
-                    } else if (gameSelectionInput.equals("BAU-CUA-CA")) {
+                    } else if (gameSelectionInput.equals("BLACKJACK")){
+                        play(new BlackJackGame(), new BlackJackPlayer(casinoAccount));
+                    }
+                    else if (gameSelectionInput.equals("BAU-CUA-CA")) {
                         play(new BauCuaCaGame(), new BauCuaCaPlayer(casinoAccount));
                     }
                     else if (gameSelectionInput.equals("BLACKJACK")){
