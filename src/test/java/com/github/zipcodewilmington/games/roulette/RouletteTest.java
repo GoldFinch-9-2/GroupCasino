@@ -101,4 +101,15 @@ public class RouletteTest {
     public void isLastThirdTest36(){
         Assert.assertTrue(game.isLastThird("36"));
     }
+
+    @Test
+    public void quitTest() {Assert.assertFalse(game.quit());}
+
+    @Test
+    public void playAgainTest() {Assert.assertFalse(game.playAgain("POOPY"));}
+
+    @Test
+    public void getWinningsTest() {
+        Assert.assertEquals(game.getWinnings("RED"), game.getPlayerBet()*2, 0);
+    }
 }

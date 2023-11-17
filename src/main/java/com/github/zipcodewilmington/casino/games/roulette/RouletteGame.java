@@ -107,6 +107,10 @@ public class RouletteGame implements GameInterface {
         return false;
     }
 
+    public double getPlayerBet(){
+        return playerBet;
+    }
+
     public double getWinnings(String condition){
         if (TripleMultiplier.contains(condition)){
             return playerBet * 3;
