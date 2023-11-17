@@ -24,6 +24,14 @@ public class SlotsGame implements GameInterface {
     }
 
     public void run(){
+        System.out.println("         d8b                         \n" +
+                "         88P            d8P          \n" +
+                "        d88          d888888P        \n" +
+                " .d888b,888   d8888b   ?88'   .d888b,\n" +
+                " ?8b,   ?88  d8P' ?88  88P    ?8b,   \n" +
+                "   `?8b  88b 88b  d88  88b      `?8b \n" +
+                "`?888P'   88b`?8888P'  `?8b  `?888P' \n" +
+                "                                     \n");
         System.out.println("Welcome to Slots!");
         do {
             String start = "?".repeat(5);
