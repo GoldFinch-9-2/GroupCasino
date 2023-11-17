@@ -4,6 +4,12 @@ import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackJackPlayer;
+import com.github.zipcodewilmington.casino.games.baucuaca.BauCuaCaGame;
+import com.github.zipcodewilmington.casino.games.baucuaca.BauCuaCaPlayer;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackJackPlayer;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
@@ -21,6 +27,7 @@ public class Casino implements Runnable {
     public void run() {
         String arcadeDashBoardInput;
         CasinoAccountManager casinoAccountManager = new CasinoAccountManager();
+        casinoAccountManager.readFile();
         do {
             arcadeDashBoardInput = getArcadeDashboardInput();
             if ("select-game".equals(arcadeDashBoardInput)) {
@@ -34,7 +41,16 @@ public class Casino implements Runnable {
                         play(new SlotsGame(), new SlotsPlayer());
                     } else if (gameSelectionInput.equals("NUMBERGUESS")) {
                         play(new NumberGuessGame(), new NumberGuessPlayer());
-                    } else {
+                    } else if (gameSelectionInput.equals("BLACKJACK")){
+                        play(new BlackJackGame(), new BlackJackPlayer(casinoAccount));
+                    }
+                    else if (gameSelectionInput.equals("BAU-CUA-CA")) {
+                        play(new BauCuaCaGame(), new BauCuaCaPlayer(casinoAccount));
+                    }
+                    else if (gameSelectionInput.equals("BLACKJACK")){
+                        play(new BlackJackGame(), new BlackJackPlayer(casinoAccount));
+                    }
+                    else {
                         // TODO - implement better exception handling
                         String errorMessage = "[ %s ] is an invalid game selection";
                         throw new RuntimeException(String.format(errorMessage, gameSelectionInput));
@@ -50,8 +66,12 @@ public class Casino implements Runnable {
                 String accountPassword = console.getStringInput("Enter your account password:");
                 CasinoAccount newAccount = casinoAccountManager.createAccount(accountName, accountPassword);
                 casinoAccountManager.registerAccount(newAccount);
+                casinoAccountManager.saveToFile();
+
             }
+            casinoAccountManager.saveToFile();
         } while (!"logout".equals(arcadeDashBoardInput));
+
     }
 
     private String getArcadeDashboardInput() {
@@ -66,7 +86,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ NUMBERGUESS ]")
+                .append("\n\t[ SLOTS ], [ NUMBERGUESS ], [ BAU-CUA-CA ], [ BLACKJACK ]")
                 .toString());
     }
 
