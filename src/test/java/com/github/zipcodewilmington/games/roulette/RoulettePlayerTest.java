@@ -12,4 +12,19 @@ public class RoulettePlayerTest {
         RoulettePlayer player = new RoulettePlayer(account);
         Assert.assertNotNull(player);
     }
+
+    @Test
+    public void getArcadeAccountTest() {
+        CasinoAccount account = new CasinoAccount("USER","PASS");
+        RoulettePlayer player = new RoulettePlayer(account);
+        Assert.assertEquals(player.getArcadeAccount(), account);
+    }
+
+    @Test
+    public void placeBetsTest() {
+        CasinoAccount account = new CasinoAccount("USER","PASS");
+        RoulettePlayer player = new RoulettePlayer(account);
+        Double expected = (double) 200;
+        Assert.assertEquals(player.placeBets(200), expected);
+    }
 }
